@@ -9,6 +9,7 @@ using System.IO;
 using Microsoft.Win32;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.AccessControl;
 
 namespace SuperWash
 {
@@ -49,35 +50,13 @@ namespace SuperWash
 
         private void washBtn_Click(object sender, EventArgs e)
         {
-            DeleteDirectory(@"C:\Users\shelby.jankaasdf");
+            DeleteDirectory(@"C:\Users\camryn - Copy");
         }
 
         public static bool DeleteDirectory(string path)
         {
             if (Directory.Exists(path))
             {
-                string[] files = Directory.EnumerateFiles(path).ToArray();
-                if (files.Length != 0)
-                {
-                    foreach (string file in files)
-                    {
-                        try
-                        {
-                            File.Delete(file);
-                        }
-                        catch (UnauthorizedAccessException)
-                        {
-                            Logger.Error(file + ": Failed to delete: Access Denied! (The file may be open or in use)");
-                            return false;
-                        }
-                        catch (Exception e)
-                        {
-                            Logger.Error(file + ": " + e.Message);
-                            return false;
-                        }
-                        Logger.Good(file + ": Deleted.");
-                    }
-                }
                 string[] dirs = Directory.EnumerateDirectories(path).ToArray();
                 if (dirs.Length != 0)
                 {
@@ -91,14 +70,19 @@ namespace SuperWash
                 }
                 try
                 {
-                    Directory.Delete(path);
+                    DirectoryInfo directoryInfo = new DirectoryInfo(path);
+                    directoryInfo.Attributes = FileAttributes.Normal;
+                    foreach(FileInfo file in directoryInfo.GetFiles())
+                    {
+                        file.Attributes = FileAttributes.Normal;
+                    }
+                    Directory.Delete(path, true);
                 }
                 catch (Exception e)
                 {
-                    Logger.Error(path + ": " + e.Message);
+                    Console.Error.WriteLine(path + ": " + e.Message);
                     return false;
                 }
-                Logger.Good(path + ": Deleted.");
                 return true;
             }
             else
@@ -107,19 +91,4 @@ namespace SuperWash
             }
         }
     }
-
-    public class Logger {
-
-        public static void Good(string message)
-        {
-            Console.WriteLine(message);
-        }
-
-        public static void Error(string message)
-        {
-            Console.WriteLine(message);
-        }
-
-    }
-
 }
