@@ -1,39 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.IO;
 using Microsoft.Win32;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Security.AccessControl;
+using System.Runtime.InteropServices;
 
 namespace SuperWash
 {
     public partial class Main : Form
     {
+
+        [DllImport("userenv.dll", CharSet = CharSet.Unicode, ExactSpelling = false, SetLastError = true)]
+        public static extern bool DeleteProfile(string sidString, string profilePath, string computerName);
         public Main()
         {
             InitializeComponent();
         }
-
         private void Main_Load(object sender, EventArgs e)
         {
             Icon = Properties.Resources.icon;
             EnumerateUsers();
         }
-
-        private List<string> profileList = new List<string>();
-
+        private List<string> profileSidList = new List<string>();
+        private List<string> profileNameList = new List<string>();
         private void EnumerateUsers()
         {
+            usersList.Items.Clear();
+            profileSidList.Clear();
+            profileNameList.Clear();
             RegistryKey ProfileList = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList", false);
             foreach(string profile in ProfileList.GetSubKeyNames())
             {
-                object profilePath = ProfileList.OpenSubKey(profile, false).GetValue("ProfileImagePath");
+                RegistryKey profileReg = ProfileList.OpenSubKey(profile, false);
+                object profilePath = profileReg.GetValue("ProfileImagePath");
                 if (
                     profilePath != null &&
                     (string)profilePath != @"C:\WINDOWS\system32\config\systemprofile" &&
@@ -42,53 +41,43 @@ namespace SuperWash
                 )
                 {
                     string profileName = profilePath.ToString().Replace(@"C:\Users\", "");
-                    profileList.Add(profilePath.ToString());
+                    profileSidList.Add(profile);
+                    profileNameList.Add(profileName);
                     usersList.Items.Add(profileName);
                 }
             }
         }
-
-        private void washBtn_Click(object sender, EventArgs e)
+        private async void washBtn_Click(object sender, EventArgs e)
         {
-            DeleteDirectory(@"C:\Users\camryn - Copy");
+            washBtn.Enabled = false;
+            usersList.Enabled = false;
+            gifShadow.BringToFront();
+            deletingGif.BringToFront();
+            deletingGif.Enabled = true;
+            List<int> indexList = new List<int>();
+            foreach (int index in usersList.SelectedIndices)
+            {
+                indexList.Add(index);
+            }
+            foreach (int index in indexList)
+            {
+                usersList.SelectedItem = profileNameList[index];
+                await DeleteSelectIndex(index);
+                usersList.Items.Remove(profileNameList[index]);
+            }
+            EnumerateUsers();
+            deletingGif.Enabled = false;
+            gifShadow.SendToBack();
+            deletingGif.SendToBack();
+            usersList.Enabled = true;
+            washBtn.Enabled = true;
         }
-
-        public static bool DeleteDirectory(string path)
+        private Task DeleteSelectIndex(int index)
         {
-            if (Directory.Exists(path))
+            return Task.Run(() =>
             {
-                string[] dirs = Directory.EnumerateDirectories(path).ToArray();
-                if (dirs.Length != 0)
-                {
-                    foreach (string dir in dirs)
-                    {
-                        if (!DeleteDirectory(dir))
-                        {
-                            return false;
-                        }
-                    }
-                }
-                try
-                {
-                    DirectoryInfo directoryInfo = new DirectoryInfo(path);
-                    directoryInfo.Attributes = FileAttributes.Normal;
-                    foreach(FileInfo file in directoryInfo.GetFiles())
-                    {
-                        file.Attributes = FileAttributes.Normal;
-                    }
-                    Directory.Delete(path, true);
-                }
-                catch (Exception e)
-                {
-                    Console.Error.WriteLine(path + ": " + e.Message);
-                    return false;
-                }
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+                DeleteProfile(profileSidList[index], null, null);
+            });
         }
     }
 }

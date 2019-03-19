@@ -16,6 +16,7 @@ namespace SuperWash
         {
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Warning());
             Application.Run(new Main());
         }
     }
