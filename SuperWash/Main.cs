@@ -35,9 +35,9 @@ namespace SuperWash
                 object profilePath = profileReg.GetValue("ProfileImagePath");
                 if (
                     profilePath != null &&
-                    (string)profilePath != @"C:\WINDOWS\system32\config\systemprofile" &&
-                    (string)profilePath != @"C:\WINDOWS\ServiceProfiles\LocalService" &&
-                    (string)profilePath != @"C:\WINDOWS\ServiceProfiles\NetworkService"
+                    profilePath.ToString().ToLower() != @"c:\windows\system32\config\systemprofile" &&
+                    profilePath.ToString().ToLower() != @"c:\windows\serviceprofiles\localservice" &&
+                    profilePath.ToString().ToLower() != @"c:\windows\serviceprofiles\networkservice"
                 )
                 {
                     string profileName = profilePath.ToString().Replace(@"C:\Users\", "");
@@ -62,10 +62,12 @@ namespace SuperWash
             foreach (int index in indexList)
             {
                 usersList.SelectedItem = profileNameList[index];
+                Text = "Deleting: " + profileNameList[index] + "... (SuperWash)";
                 await DeleteSelectIndex(index);
                 usersList.Items.Remove(profileNameList[index]);
             }
             EnumerateUsers();
+            Text = "SuperWash";
             deletingGif.Enabled = false;
             gifShadow.SendToBack();
             deletingGif.SendToBack();

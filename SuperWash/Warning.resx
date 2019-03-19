@@ -121,9 +121,6 @@
     <value>17, 17</value>
   </metadata>
   <data name="RTB.Text" xml:space="preserve">
-    <value>Warning! Super Wash is a program designed to batch remove Windows User Accounts via native Windows methods. This prompt is the only warning. Pressing "Wash" on the next screen will run the deletion without further concent. Please proceed with caution!</value>
+    <value>Warning! Super Wash is a program designed to batch remove Windows User Accounts via native Windows methods. This prompt is the only warning. Pressing "Wash" on the next screen will run the deletion without further consent. Please proceed with caution!</value>
   </data>
-  <metadata name="credToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
 </root>
