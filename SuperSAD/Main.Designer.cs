@@ -1,4 +1,4 @@
-﻿namespace SuperWash
+﻿namespace SuperSAD
 {
     partial class Main
     {
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.usersList = new System.Windows.Forms.ListBox();
-            this.washBtn = new System.Windows.Forms.Button();
+            this.deleteBtn = new System.Windows.Forms.Button();
             this.deletingGif = new System.Windows.Forms.PictureBox();
             this.gifShadow = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.deletingGif)).BeginInit();
@@ -52,17 +52,17 @@
             // 
             // washBtn
             // 
-            this.washBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.deleteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.washBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.washBtn.Location = new System.Drawing.Point(0, 247);
-            this.washBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.washBtn.Name = "washBtn";
-            this.washBtn.Size = new System.Drawing.Size(324, 53);
-            this.washBtn.TabIndex = 2;
-            this.washBtn.Text = "Wash";
-            this.washBtn.UseVisualStyleBackColor = true;
-            this.washBtn.Click += new System.EventHandler(this.washBtn_Click);
+            this.deleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.deleteBtn.Location = new System.Drawing.Point(0, 247);
+            this.deleteBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.deleteBtn.Name = "washBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(324, 53);
+            this.deleteBtn.TabIndex = 2;
+            this.deleteBtn.Text = "Delete";
+            this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // deletingGif
             // 
@@ -70,7 +70,7 @@
             this.deletingGif.BackColor = System.Drawing.Color.White;
             this.deletingGif.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.deletingGif.Enabled = false;
-            this.deletingGif.Image = global::SuperWash.Properties.Resources.delete;
+            this.deletingGif.Image = global::SuperSAD.Properties.Resources.delete;
             this.deletingGif.Location = new System.Drawing.Point(10, 93);
             this.deletingGif.Name = "deletingGif";
             this.deletingGif.Size = new System.Drawing.Size(304, 60);
@@ -92,7 +92,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(324, 300);
             this.Controls.Add(this.usersList);
-            this.Controls.Add(this.washBtn);
+            this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.deletingGif);
             this.Controls.Add(this.gifShadow);
             this.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -101,7 +101,7 @@
             this.MinimizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SuperWash";
+            this.Text = "SuperSAD";
             this.Load += new System.EventHandler(this.Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.deletingGif)).EndInit();
             this.ResumeLayout(false);
@@ -111,7 +111,7 @@
         #endregion
 
         private System.Windows.Forms.ListBox usersList;
-        private System.Windows.Forms.Button washBtn;
+        private System.Windows.Forms.Button deleteBtn;
         private System.Windows.Forms.PictureBox deletingGif;
         private System.Windows.Forms.Panel gifShadow;
     }

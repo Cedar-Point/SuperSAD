@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SuperWash - Batch Profile Clearing Tool")]
-[assembly: AssemblyDescription("SuperWash")]
+[assembly: AssemblyTitle("SuperSAD - Super Account Delete")]
+[assembly: AssemblyDescription("SuperSAD")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Dylan Bickerstaff")]
-[assembly: AssemblyProduct("SuperWash")]
+[assembly: AssemblyProduct("SuperSAD")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("Dylan Bickerstaff")]
 [assembly: AssemblyCulture("")]

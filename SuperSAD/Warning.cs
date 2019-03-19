@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SuperWash
+namespace SuperSAD
 {
     public partial class Warning : Form
     {

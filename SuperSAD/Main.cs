@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace SuperWash
+namespace SuperSAD
 {
     public partial class Main : Form
     {
@@ -47,9 +47,9 @@ namespace SuperWash
                 }
             }
         }
-        private async void washBtn_Click(object sender, EventArgs e)
+        private async void deleteBtn_Click(object sender, EventArgs e)
         {
-            washBtn.Enabled = false;
+            deleteBtn.Enabled = false;
             usersList.Enabled = false;
             gifShadow.BringToFront();
             deletingGif.BringToFront();
@@ -62,17 +62,17 @@ namespace SuperWash
             foreach (int index in indexList)
             {
                 usersList.SelectedItem = profileNameList[index];
-                Text = "Deleting: " + profileNameList[index] + "... (SuperWash)";
+                Text = "Deleting: " + profileNameList[index] + "... (SuperSAD)";
                 await DeleteSelectIndex(index);
                 usersList.Items.Remove(profileNameList[index]);
             }
             EnumerateUsers();
-            Text = "SuperWash";
+            Text = "SuperSAD";
             deletingGif.Enabled = false;
             gifShadow.SendToBack();
             deletingGif.SendToBack();
             usersList.Enabled = true;
-            washBtn.Enabled = true;
+            deleteBtn.Enabled = true;
         }
         private Task DeleteSelectIndex(int index)
         {

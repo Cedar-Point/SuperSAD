@@ -1,4 +1,4 @@
-﻿namespace SuperWash
+﻿namespace SuperSAD
 {
     partial class Warning
     {
@@ -56,9 +56,9 @@
             this.titleLbl.Location = new System.Drawing.Point(122, 21);
             this.titleLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.titleLbl.Name = "titleLbl";
-            this.titleLbl.Size = new System.Drawing.Size(125, 21);
+            this.titleLbl.Size = new System.Drawing.Size(117, 21);
             this.titleLbl.TabIndex = 1;
-            this.titleLbl.Text = "Super Wash";
+            this.titleLbl.Text = "Super SAD";
             // 
             // RTB
             // 
@@ -113,7 +113,7 @@
             this.MinimizeBox = false;
             this.Name = "Warning";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SuperWash: Warning!";
+            this.Text = "SuperSAD: Warning!";
             this.Load += new System.EventHandler(this.Warning_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             this.ResumeLayout(false);
